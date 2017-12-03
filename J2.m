@@ -3,7 +3,7 @@ tic
 % time step
 t0 = 0;
 tstep = 0.1;
-tf =12000;
+tf =240e3;
 
 %% Initial position (ref http://www.celestrak.com/NORAD/documentation/spacetrk.pdf)
 % x10 =-7.061909962477235e+06;
@@ -33,8 +33,7 @@ y = zeros(7,tf/h+1);
 
 i = 1;
 % state vector y = [t x0 y0 z0 vx0 vy0 vz0]
-y(:,1) =[0;4.30016816309595e-10;-978031.627569281;6954452.31444072;-7553.79967138173;-6.42617031639339e-14;4.57549341384933e-13]';
-
+y(:,1) = [0;SGP_1(2:7,1)];
 for j =0:h:tf-h
     
     k1= J2fcn(y(1,i), y(2:7,i));
@@ -50,9 +49,9 @@ end
 
 toc
 
- 
+save y.mat
 %J2_test_case = [[t0:tstep:tf]'; x(:,1); x(:,3);x(:,5);x(:,2);x(:,4);x(:,6)];
-% rr = sqrt(y(2,:).*y(2,:)+y(3,:).*y(3,:)+y(4,:).*y(4,:));
+%rr = sqrt(y(2,:).*y(2,:)+y(3,:).*y(3,:)+y(4,:).*y(4,:));
 % hold on 
 % plot(t, y(2,:)/1000);
 % plot(t, y(3,:)/1000);

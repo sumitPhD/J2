@@ -77,17 +77,18 @@
 %     %%
 %%
 %%Launch 2
-orbInc=  90;%098.2089;
-meanMo =    14.62844671;
+tic
+orbInc=  98;%098.2089;
+meanMo =    14.62844671;%revolutions per day
  SGPdragp1 = 0.00000076;%.00073094;  % from ---First time derivative of mean motion(rad/min^2)
 SGPdragp2 =0.13844*10^(-3);     % Second time derivative of mean motion (rad/min^3
 SGP4dragp = 0.24125*10^(-4);%0.66816*10^(-4); Bstar
 n0 = 2*pi*meanMo/1440; % Mean motion (rad/min) 
-    e0 = 0.0045; % Eccentricity (0.0<=e0>=1.0)   2)
+    e0 = 0.0008; % Eccentricity (0.0<=e0>=1.0)   2)
     i0 = pi*orbInc/180; % Inclination (rad)      3)
-    M0 = 0;%5.0563; % Mean anomaly (rad)    4)
-    w0 = pi/2;%1.2269; % Argument of perigee (rad)   5)
-    Ohm0 = 0;%4.8003; %rsc
+    M0 = 5.0563; % Mean anomaly (rad)    4)
+    w0 = 1.2269; % Argument of perigee (rad)   5)
+    Ohm0 = 4.8003; %rsc
     dn0 = 2*2*pi*SGPdragp1/(1440^2); % First time derivative of mean motion(rad/min^2)
     ddn0 = 6*2*pi*SGPdragp2/(1440^3); % Second time derivative of mean motion (rad/min^3)
     Bstar = SGP4dragp; % SGP4 type drag coefficient
@@ -96,11 +97,13 @@ n0 = 2*pi*meanMo/1440; % Mean motion (rad/min)
  modTLE = [t0 dn0 ddn0 Bstar i0 Ohm0 e0 w0 M0 n0 revNo];
 
 %%
-dT = 0:1:12000; % in seconds 
+dT = 0:0.1:240e3; % in seconds 
 [X, V] = sgp(modTLE, dT/60); 
+toc
 SGP_1 = [dT/60; X'; V'];
 % plot(dT, X)
-save SGP_1.mat 
+clear X V dT 
+save SGP.mat 
 %% Summary and Conclusion
 %Test case has be taken from SGP4 model from the referece 
 %%http://www.celestrak.com/NORAD/documentation/spacetrk.pdf page 80

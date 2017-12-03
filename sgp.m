@@ -147,3 +147,6 @@ R = R * km_per_er /aE;
 R = R * 1000;
 dR = dR * km_per_er / aE * min_per_day / sec_per_day;
 dR = dR * 1000;
+% save e.mat 
+% save Ohmk.mat 
+% save ik.mat
