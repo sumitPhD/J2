@@ -62,7 +62,7 @@
 % Updated to address circular equatorial orbits       12/12/2013          %
 %------------------------------------------------------------------       %
 function [a,eMag,i,O,o,nu,truLon,argLat,lonPer,p] = rv2orb(r,v,mu)
-if ~exist('mu','var');  t = getConst(); mu = t.Earth.Mu; end
+%if ~exist('mu','var');  t = getConst(); mu = t.Earth.Mu; end
 %Specific angular momentum
 h = cross(r,v);
 n = cross(repmat([0;0;1],[1,size(r,2)]),h); nMag = sqrt(sum(n.^2,1));
